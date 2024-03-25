@@ -1,58 +1,83 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import CharactersList from '../Characters/characters-list';
-import TabMenu from '../tablink/tab-menu';
+import axios, { all } from "axios";
+import React, { useEffect, useState } from "react";
+import CharactersList from "../Characters/characters-list";
+import TabMenu from "../tablink/tab-menu";
 
 const HomeView = () => {
-    const [allCharacters, setAllCharacters] = useState([])
-    const [teamName, setTeamName] = useState(null)
-    const [characters, setCharacters] = useState([]);
-    const [activeFilter, setActiveFilter] = useState(null);
+  const [allCharacters, setAllCharacters] = useState([]);
+  const [teamName, setTeamName] = useState("gryffindor");
+  const [activeFilter, setActiveFilter] = useState(null);
+
+  const handleClick = (name) => {
+    setTeamName(name);
+    setActiveFilter(name);
+  };
+
+  useEffect(() => {
+    const getAllCharacter = async () => {
+      try {
+        // const response = await axios.get('https://hp-api.onrender.com/api/characters');
+        const response = await axios.get(
+          "https://potterhead-api.vercel.app/api/characters"
+        );
+        setAllCharacters(response.data);
+      } catch (error) {
+        console.error("Error fetching characters:", error);
+      }
+    };
+
+    getAllCharacter();
+  }, []);
 
 
-    const handleClick = (name) => {
-        setTeamName(name)
-        setActiveFilter(name);
+  const gryffindor = [];
+  const slytherin = [];
+  const hufflepuff = [];
+  const ravenclaw = [];
+
+  allCharacters?.forEach((person) => {
+    switch (person?.house) {
+      case "Gryffindor":
+        gryffindor.push(person);
+        break;
+      case "Slytherin":
+        slytherin.push(person);
+        break;
+      case "Hufflepuff":
+        hufflepuff.push(person);
+        break;
+      case "Ravenclaw":
+        ravenclaw.push(person);
+        break;
+      default:
+        break;
     }
+  });
 
-    useEffect(() => {
-        const getAllCharacter = async () => {
-            try {
-                const response = await axios.get('https://hp-api.onrender.com/api/characters');
-                setAllCharacters(response.data)
-            } catch(error) {
-                console.error('Error fetching characters:', error)
-            }
-        }
+  let characters = [];
 
-        getAllCharacter()
-    }, [])
+  const teams = {
+    All: allCharacters,
+    Gryffindor: gryffindor,
+    Slytherin: slytherin,
+    Hufflepuff: hufflepuff,
+    Ravenclaw: ravenclaw,
+  };
 
-
-
-    useEffect(() => {
-        const getAllCharacter = async () => {
-            try {
-                const response = await axios.get(`https://hp-api.onrender.com/api/characters/house/${teamName}`);
-                setCharacters(response.data)
-            } catch(error) {
-                console.error('Error fetching characters:', error)
-            }
-        }
-
-        getAllCharacter()
-    }, [teamName])
-
-
+  characters = teams[teamName] || [];
 
   return (
-    <div className='container max-w-[1200px] mx-auto mt-20'>
-        <TabMenu  handleClick = {handleClick} activeFilter = {activeFilter} />
-        <CharactersList allCharacters = {allCharacters} characters = {characters} />
+    <div className="container max-w-[1200px] mx-auto mt-20">
+      <TabMenu handleClick={handleClick} activeFilter={activeFilter} />
+      <CharactersList
+        allCharacters={allCharacters}
+        characters={characters}
+        teamName={teamName}
+      />
     </div>
-  )
-}
+  );
+};
 
 export default HomeView;

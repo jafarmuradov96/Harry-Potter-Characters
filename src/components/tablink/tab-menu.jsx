@@ -5,10 +5,10 @@ import React from 'react';
 const TabMenu = ({ activeFilter, handleClick }) => {
   const tabs = [
     { label: 'All', filter: null },
-    { label: 'Gryffindor', filter: 'gryffindor' },
-    { label: 'Slytherin', filter: 'slytherin' },
-    { label: 'Hufflepuff', filter: 'hufflepuff' },
-    { label: 'Ravenclaw', filter: 'ravenclaw' }
+    { label: 'Gryffindor', filter: 'Gryffindor' },
+    { label: 'Slytherin', filter: 'Slytherin' },
+    { label: 'Hufflepuff', filter: 'Hufflepuff' },
+    { label: 'Ravenclaw', filter: 'Ravenclaw' }
   ];
 
   return (

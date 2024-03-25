@@ -1,10 +1,10 @@
 import React from "react";
 import CharacterItem from "./character-item";
 
-const CharactersList = ({ allCharacters, characters }) => {
+const CharactersList = ({ allCharacters, characters, teamName }) => {
   return (
     <>
-      {characters.length <= 0 ? (
+      {characters && characters.length <= 0 ? (
         <ul className="w-full flex gap-4 flex-wrap mt-10 ">
           {allCharacters?.map((character) => (
             character?.image !== '' &&
