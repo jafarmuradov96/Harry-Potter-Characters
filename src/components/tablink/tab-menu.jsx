@@ -12,11 +12,11 @@ const TabMenu = ({ activeFilter, handleClick }) => {
   ];
 
   return (
-    <ul className='flex gap-4'>
+    <ul className='lg:flex lg:flex-row md:flex-row gap-4 sm:flex-col'>
       {tabs.map(tab => (
         <li
           key={tab.filter || 'all'}
-          className={`bg-gray-200 rounded-lg py-[10px] px-[25px] cursor-pointer ${activeFilter === tab.filter ? 'active' : ''}`}
+          className={`bg-gray-200 rounded-lg py-[10px] px-[25px] sm:mb-[10px] cursor-pointer ${activeFilter === tab.filter ? 'active' : ''}`}
           onClick={() => handleClick(tab.filter)}
         >
           <Link href='/'>{tab.label}</Link>

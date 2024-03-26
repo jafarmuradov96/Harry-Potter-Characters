@@ -9,6 +9,7 @@ const HomeView = () => {
   const [allCharacters, setAllCharacters] = useState([]);
   const [teamName, setTeamName] = useState("gryffindor");
   const [activeFilter, setActiveFilter] = useState(null);
+  const [loading, setLoading] = useState(true)
 
   const handleClick = (name) => {
     setTeamName(name);
@@ -23,6 +24,7 @@ const HomeView = () => {
           "https://potterhead-api.vercel.app/api/characters"
         );
         setAllCharacters(response.data);
+        setLoading(false)
       } catch (error) {
         console.error("Error fetching characters:", error);
       }
@@ -69,14 +71,15 @@ const HomeView = () => {
   characters = teams[teamName] || [];
 
   return (
-    <div className="container max-w-[1200px] mx-auto mt-20">
-      <TabMenu handleClick={handleClick} activeFilter={activeFilter} />
+    <>
+      <TabMenu handleClick={handleClick} activeFilter={activeFilter}  />
       <CharactersList
         allCharacters={allCharacters}
         characters={characters}
         teamName={teamName}
+        loading = {loading}
       />
-    </div>
+    </>
   );
 };
 
