@@ -31,7 +31,7 @@ const MoviesList = () => {
       <h1 className="text-3xl font-bold text-center">
         Harry Potter movie series
       </h1>
-      <ul className="lg:mt-[100px] md:mt-[50px] sm:mt:-[50px]">
+      <ul className="mt-[50px] sm:mt:-[50px] md:mt-[50px] lg:mt-[100px]">
         {movies &&
           movies?.map((movie) => (
             <li key={movie?.serial} className=" mb-10">

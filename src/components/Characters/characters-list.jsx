@@ -11,7 +11,7 @@ const CharactersList = ({ allCharacters, characters, loading  }) => {
         <ul className="w-full flex gap-4 flex-wrap mt-10 ">
           {allCharacters?.map((character) => (
             character?.image !== '' &&
-            <li className="xl:w-[24%] lg:w-[32%] md:w-[48%] sm:w-[98%] bg-zinc-300 p-[20px] rounded-md mb-4 " key={character.id}>
+            <li className="w-[100%] sm:w-[98%] md:w-[48%] lg:w-[32%] xl:w-[24%]    bg-zinc-300 p-[20px] rounded-md mb-4 " key={character.id}>
               {
                 loading ? <Skeleton  className="h-[300px]"/> :
                 
@@ -25,7 +25,7 @@ const CharactersList = ({ allCharacters, characters, loading  }) => {
           {characters?.map((character) => (
             character?.image !== '' &&
 
-            <li className="xl:w-[24%] lg:w-[32%] md:w-[48%] sm:w-[98%] bg-zinc-300 p-[20px] rounded-md mb-4 " key={character.id}>
+            <li className="w-[100%] sm:w-[98%] md:w-[48%] lg:w-[32%] xl:w-[24%]    bg-zinc-300 p-[20px] rounded-md mb-4 " key={character.id}>
               {
                 loading ? <Skeleton  className="h-[300px]"/> :
                 

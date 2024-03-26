@@ -28,7 +28,7 @@ const Books = () => {
   return (
     <>
       <h1 className="text-3xl font-bold text-center">Harry Potter book series</h1>
-      <ul className="lg:mt-[100px] md:mt-[50px] sm:mt:-[50px]">
+      <ul className="mt-[50px] sm:mt:-[50px] md:mt-[50px] lg:mt-[100px] ">
         {books &&
           books?.map((book) => (
             <li key={book?.serial}>

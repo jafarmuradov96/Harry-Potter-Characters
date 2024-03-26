@@ -8,7 +8,7 @@ const MovieItem = ({ movie, loading }) => {
     <>
       {
         loading ? <Skeleton  className="h-[400px]"/> :
-        <div className="flex lg:flex-row md:flex-col sm:flex-col mb-20 md:mb-32 sm:mb-32">
+        <div className="flex flex-col  sm:flex-col md:flex-col lg:flex-row  mb-20 sm:mb-32 md:mb-32 ">
         <img
           src={movie?.poster}
           alt="poster"
