@@ -2,9 +2,13 @@ import React from "react";
 import CharacterItem from "./character-item";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useSelector } from "react-redux";
 
 
-const CharactersList = ({ allCharacters, characters, loading  }) => {
+const CharactersList = ({ allCharacters, characters  }) => {
+
+  const loading = useSelector((state) => state.dataReducer.data)
+
   return (
     <>
       {characters && characters.length <= 0 ? (

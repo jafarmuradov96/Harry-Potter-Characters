@@ -1,15 +1,18 @@
 "use client";
 
-import axios, { all } from "axios";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CharactersList from "../Characters/characters-list";
 import TabMenu from "../tablink/tab-menu";
+import { useDispatch } from "react-redux";
+import { setLoading } from "@/redux/data/dataSlice";
 
 const HomeView = () => {
   const [allCharacters, setAllCharacters] = useState([]);
   const [teamName, setTeamName] = useState("gryffindor");
   const [activeFilter, setActiveFilter] = useState(null);
-  const [loading, setLoading] = useState(true)
+
+  const dispatch = useDispatch()
 
   const handleClick = (name) => {
     setTeamName(name);
@@ -19,12 +22,11 @@ const HomeView = () => {
   useEffect(() => {
     const getAllCharacter = async () => {
       try {
-        // const response = await axios.get('https://hp-api.onrender.com/api/characters');
         const response = await axios.get(
           "https://potterhead-api.vercel.app/api/characters"
         );
         setAllCharacters(response.data);
-        setLoading(false)
+        dispatch(setLoading(false))
       } catch (error) {
         console.error("Error fetching characters:", error);
       }
@@ -77,7 +79,6 @@ const HomeView = () => {
         allCharacters={allCharacters}
         characters={characters}
         teamName={teamName}
-        loading = {loading}
       />
     </>
   );

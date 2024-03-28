@@ -2,8 +2,10 @@ import Link from "next/link";
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useSelector } from "react-redux";
 
-const MovieItem = ({ movie, loading }) => {
+const MovieItem = ({ movie }) => {
+  const loading = useSelector((state) => state.dataReducer.data)
   return (
     <>
       {

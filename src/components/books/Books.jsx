@@ -4,10 +4,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BooksItem from "./books-item";
 import Skeleton from "react-loading-skeleton";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/redux/data/dataSlice";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true)
+
+  const loading = useSelector((state) => state.dataReducer.data)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const getAllBooks = async () => {
@@ -16,7 +20,7 @@ const Books = () => {
           "https://potterhead-api.vercel.app/api/books"
         );
         setBooks(response.data);
-        setLoading(false)
+        dispatch(setLoading(false))
       } catch (error) {
         console.error("Error fetching books:", error);
       }

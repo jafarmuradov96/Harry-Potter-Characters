@@ -1,14 +1,14 @@
 "use client";
 
 import axios from "axios";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MovieItem from "./movie-item";
-
+import { useDispatch } from "react-redux";
 const MoviesList = () => {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true) 
 
+  
+  const dispatch = useDispatch()
   useEffect(() => {
     const getAllMovies = async () => {
       try {
@@ -17,12 +17,11 @@ const MoviesList = () => {
         );
 
         setMovies(response.data);
-        setLoading(false)
+        dispatch(setLoading(false))
       } catch (error) {
         console.error("Error fetching movies:", error);
       }
     };
-
     getAllMovies();
   }, []);
 
@@ -35,7 +34,7 @@ const MoviesList = () => {
         {movies &&
           movies?.map((movie) => (
             <li key={movie?.serial} className=" mb-10">
-              <MovieItem movie={movie} loading = {loading} />
+              <MovieItem movie={movie} />
             </li>
           ))}
       </ul>
